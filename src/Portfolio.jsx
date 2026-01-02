@@ -24,7 +24,7 @@ const PORTFOLIO_DATA = {
       tags: ["Flask", "MySQL", "Bootstrap", "Full-Stack"],
       link: "https://github.com/aarushisaki/VIT-Clubs",
       color: "from-blue-500/20 to-purple-500/20",
-      screenshot: "/public/vitclubs.png"
+      screenshot: "/vitclubs.png"
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ const PORTFOLIO_DATA = {
       tags: ["HTML/CSS", "TailwindCSS", "Framer Motion", "React"],
       link: "#",
       color: "from-indigo-500/20 to-blue-500/20",
-      screenshot: "/public/portfolio.png"
+      screenshot: "/portfolio.png"
     },
     {
       id: 3,
@@ -44,7 +44,7 @@ const PORTFOLIO_DATA = {
       tags: ["HTML/CSS", "JavaScript", "DOM Manipulation"],
       link: "https://github.com/aarushisaki/Password-Checker",
       color: "from-emerald-500/20 to-teal-500/20",
-      screenshot: "/public/passwordchecker.png"
+      screenshot: "/passwordchecker.png"
     }
   ],
   experience: [
@@ -211,7 +211,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-bg-primary" />
 
         <img
-            src="/public/aarushi.jpg"
+            src="/aarushi.jpg"
             alt="Aarushi Saki"
             className="
             absolute bottom-0 right-[-10%]
@@ -277,7 +277,7 @@ const Hero = () => {
             </div>
 
             <motion.a
-              href="/public/resume.pdf"
+              href="/resume.pdf"
               download="Aarushi_Saki_Resume.pdf"
               className="inline-flex w-fit items-center gap-3 px-6 py-3 bg-accent text-bg-primary font-mono text-sm uppercase tracking-wider rounded-full hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
               initial={{ opacity: 0, y: 20 }}
