@@ -21,7 +21,7 @@ const PORTFOLIO_DATA = {
       title: "VIT Clubs",
       description: "Designed and implemented a platform to streamline discovery, communication, and engagement across university clubs. Focused on information architecture, user flows, and scalable data structures to support growing communities.",
       year: "2024",
-      tags: ["Flask", "MySQL", "Bootstrap", "Full-Stack"],
+      tags: ["Flask", "MySQL", "Bootstrap", "HTML/CSS"],
       link: "https://github.com/aarushisaki/VIT-Clubs",
       color: "from-blue-500/20 to-purple-500/20",
       screenshot: "/vitclubs.png"
@@ -31,7 +31,7 @@ const PORTFOLIO_DATA = {
       title: "Personal Portfolio",
       description: "Designed and engineered a personal web platform to explore interaction design, motion systems, and information hierarchy. Built with a focus on performance, accessibility, and maintainability as a living frontend system.",
       year: "2025",
-      tags: ["HTML/CSS", "TailwindCSS", "Framer Motion", "React"],
+      tags: ["HTML/CSS", "TailwindCSS", "Framer Motion", "React", "Vite"],
       link: "#",
       color: "from-indigo-500/20 to-blue-500/20",
       screenshot: "/portfolio.png"
