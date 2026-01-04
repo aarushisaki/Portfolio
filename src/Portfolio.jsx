@@ -77,7 +77,7 @@ const PORTFOLIO_DATA = {
   },
   about: [
     {
-      text: "I don’t approach my work as a checklist of tasks — I think in systems.",
+      text: "I don’t approach my work as a checklist of tasks -— I think in systems.",
       hasLinks: false
     },
     {
