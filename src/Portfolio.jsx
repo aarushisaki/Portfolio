@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Mail, Github, Linkedin, ChevronDown, Moon, Sun, Download } from 'lucide-react';
+import { ArrowUpRight, Mail, Github, Linkedin, Moon, Sun, Download, Menu, X } from 'lucide-react';
 
-// ============================================================================
-// DATA / CONFIG
-// ============================================================================
 const PORTFOLIO_DATA = {
   name: "Aarushi Saki",
   title: "Frontend Engineering · Research · Product & Ops",
   positioning: "I work across frontend engineering, research, and operational strategy — translating complex problems into scalable, human-centered solutions.",
-  company: "GSoC Innovators Club",
   email: "aarushi.saki13@gmail.com",
   socials: {
     github: "https://github.com/aarushisaki",
@@ -31,7 +27,7 @@ const PORTFOLIO_DATA = {
       title: "Personal Portfolio",
       description: "Designed and engineered a personal web platform to explore interaction design, motion systems, and information hierarchy. Built with a focus on performance, accessibility, and maintainability as a living frontend system.",
       year: "2025",
-      tags: ["HTML/CSS", "TailwindCSS", "Framer Motion", "React", "Vite"],
+      tags: ["HTML/CSS", "TailwindCSS", "Framer Motion", "React"],
       link: "#",
       color: "from-indigo-500/20 to-blue-500/20",
       screenshot: "/portfolio.png"
@@ -39,7 +35,7 @@ const PORTFOLIO_DATA = {
     {
       id: 3,
       title: "Password Checker",
-      description: "This project implements a password validation system that evaluates strength criteria and provides dynamic visual feedback as users type. The interface highlights unmet rules and updates in real time, demonstrating my ability to combine logic with interactive frontend behavior. The logic is modular and can be extended with additional validation rules.",
+      description: "Password validation system with dynamic visual feedback and real-time strength evaluation. Demonstrates modular logic combined with interactive frontend behavior.",
       year: "2025",
       tags: ["HTML/CSS", "JavaScript", "DOM Manipulation"],
       link: "https://github.com/aarushisaki/Password-Checker",
@@ -71,33 +67,19 @@ const PORTFOLIO_DATA = {
     }
   ],
   stack: {
-    Languages: ["Python", "C++", "JavaScript", "SQL (MySQL)", "HTML/CSS"],
+    Languages: ["Python", "C++", "JavaScript", "SQL", "HTML/CSS"],
     Technologies: ["Flask", "Bootstrap", "WordPress", "REST APIs"],
     Tools: ["VS Code", "GitHub", "Figma", "MATLAB", "Canva"]
   },
   about: [
-    {
-      text: "I don’t approach my work as a checklist of tasks -— I think in systems.",
-      hasLinks: false
-    },
-    {
-      text: "I’m drawn to roles where structure matters: shaping interfaces, organizing information, and building processes that don’t collapse when things scale. Whether I’m engineering frontend components, mapping workflows, or supporting leadership initiatives, my focus stays the same — clarity, efficiency, and intent.",
-      hasLinks: false
-    },
-    {
-      text: "I’ve led fast-growing student communities, built interactive web platforms, and worked close to execution rather than theory. I care about how things feel to users, how they function behind the scenes, and whether they hold up under real-world use.",
-      hasLinks: false
-    },
-    {
-      text: "I’m most effective in environments that value ownership, thoughtful problem-solving, and people who can move between ideas and execution without losing precision.",
-      hasLinks: false
-    }
+    "I don't approach my work as a checklist of tasks — I think in systems.",
+    "I'm drawn to roles where structure matters: shaping interfaces, organizing information, and building processes that don't collapse when things scale. Whether I'm engineering frontend components, mapping workflows, or supporting leadership initiatives, my focus stays the same — clarity, efficiency, and intent.",
+    "I've led fast-growing student communities, built interactive web platforms, and worked close to execution rather than theory. I care about how things feel to users, how they function behind the scenes, and whether they hold up under real-world use.",
+    "I'm most effective in environments that value ownership, thoughtful problem-solving, and people who can move between ideas and execution without losing precision."
   ]
 };
 
-// ============================================================================
-// THEME CONTEXT
-// ============================================================================
+// Theme Context
 const ThemeContext = React.createContext();
 
 const useTheme = () => {
@@ -110,7 +92,7 @@ const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    const savedTheme = 'dark';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
@@ -118,7 +100,6 @@ const ThemeProvider = ({ children }) => {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    localStorage.setItem('portfolio-theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
@@ -129,9 +110,7 @@ const ThemeProvider = ({ children }) => {
   );
 };
 
-// ============================================================================
-// UTILITY COMPONENTS
-// ============================================================================
+// Utility Components
 const NoiseOverlay = () => (
   <div 
     className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
@@ -184,10 +163,7 @@ const SignatureSVG = ({ animate = false, onComplete, className }) => {
   );
 };
 
-// ============================================================================
-// SECTION COMPONENTS
-// ============================================================================
-
+// Section Components
 const Hero = () => {
   const { scrollY } = useScroll();
   
@@ -198,42 +174,40 @@ const Hero = () => {
   const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center pt-20 md:pt-24">
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center pt-20 md:pt-24">
       {/* Animated Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-gradient" />
       
+      {/* Desktop Image - Hidden on mobile */}
       <motion.div 
         style={{ y: yImg, opacity: opacityImg }}
-        className="absolute right-[-10%] md:right-0 bottom-0 h-[85vh] w-auto md:w-[45vw] z-0 select-none pointer-events-none"
+        className="hidden md:block absolute right-[-10%] md:right-0 bottom-0 h-[85vh] w-auto md:w-[45vw] z-0 select-none pointer-events-none"
       >
         <div className="relative w-full h-full overflow-hidden">
-        {/* Background fill so transparency doesn’t show */}
-        <div className="absolute inset-0 bg-bg-primary" />
-
-        <img
+          <div className="absolute inset-0 bg-bg-primary" />
+          <img
             src="/aarushi.jpg"
             alt="Aarushi Saki"
             className="
-            absolute bottom-0 right-[-10%]
-            h-[115%] w-auto
-            object-cover
-            contrast-125
-            brightness-100
-            opacity-100
-            transition-all duration-700
+              absolute bottom-0 right-[-10%]
+              h-[115%] w-auto
+              object-cover
+              contrast-125
+              brightness-100
+              opacity-100
+              transition-all duration-700
             "
             style={{
-            maskImage: 'linear-gradient(to left, black 85%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to left, black 85%, transparent)',
+              maskImage: 'linear-gradient(to left, black 85%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to left, black 85%, transparent)',
             }}
-        />
-
-        {/* Depth & blending */}
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-bg-primary/40 to-bg-primary" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent" />
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-bg-primary/40 to-bg-primary" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent" />
         </div>
       </motion.div>
 
+      {/* Content */}
       <motion.div 
         style={{ y: yText, opacity: opacityText, scale }}
         className="relative z-10 px-6 md:px-20 max-w-4xl w-full"
@@ -244,7 +218,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1 
-            className="text-4xl md:text-6xl font-serif text-text-primary leading-[0.85] tracking-tight mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif text-text-primary leading-[0.85] tracking-tight mb-6 md:mb-8"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -254,12 +228,12 @@ const Hero = () => {
         </motion.div>
         
         <motion.div 
-          className="space-y-8 max-w-lg"
+          className="space-y-6 md:space-y-8 max-w-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <p className="text-xl md:text-2xl font-sans font-light text-text-secondary leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl font-sans font-light text-text-secondary leading-relaxed">
             {PORTFOLIO_DATA.positioning}
           </p>
           
@@ -271,7 +245,7 @@ const Hero = () => {
                 animate={{ width: 48 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
               />
-              <p className="text-sm font-mono text-text-tertiary uppercase tracking-widest">
+              <p className="text-xs sm:text-sm font-mono text-text-tertiary uppercase tracking-widest">
                 {PORTFOLIO_DATA.title}
               </p>
             </div>
@@ -279,14 +253,14 @@ const Hero = () => {
             <motion.a
               href="/resume.pdf"
               download="Aarushi_Saki_Resume.pdf"
-              className="inline-flex w-fit items-center gap-3 px-6 py-3 bg-accent text-bg-primary font-mono text-sm uppercase tracking-wider rounded-full hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
+              className="inline-flex w-fit items-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-accent text-bg-primary font-mono text-xs sm:text-sm uppercase tracking-wider rounded-full hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Download size={18} className="group-hover:animate-bounce" />
+              <Download size={16} className="group-hover:animate-bounce" />
               Download Resume
             </motion.a>
           </div>
@@ -387,6 +361,8 @@ const Projects = () => {
         <div className="flex justify-center pt-20 border-t border-border mt-20">
           <motion.a 
             href="https://github.com/aarushisaki" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-accent transition-colors border-b border-text-secondary hover:border-accent pb-0.5 group/link"
             whileHover={{ x: 2 }}
             initial={{ opacity: 0, y: 20 }}
@@ -522,7 +498,7 @@ const About = () => {
           transition={{ duration: 1.0, ease: "easeOut" }}
           className="max-w-[720px] mx-auto space-y-12 relative"
         >
-          {PORTFOLIO_DATA.about.map((paragraph, index) => (
+          {PORTFOLIO_DATA.about.map((text, index) => (
             <motion.p 
               key={index} 
               className="text-xl md:text-2xl font-serif leading-relaxed text-text-primary"
@@ -531,19 +507,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
             >
-              {paragraph.text}
-              {paragraph.hasLinks === undefined && paragraph.links && paragraph.links.map((link, i) => (
-                <React.Fragment key={i}>
-                  <a 
-                    href={link.url} 
-                    className="border-b-2 border-accent/30 hover:border-accent transition-colors cursor-pointer text-accent hover:text-primary font-medium"
-                  >
-                    {link.text}
-                  </a>
-                  {link.prefix}
-                </React.Fragment>
-              ))}
-              {paragraph.suffix}
+              {text}
             </motion.p>
           ))}
         </motion.div>
@@ -583,7 +547,7 @@ const Contact = () => {
             </motion.div>
             <span className="text-xs font-mono uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors">Email</span>
           </a>
-          <a href={PORTFOLIO_DATA.socials.github} className="flex flex-col items-center gap-2 group">
+          <a href={PORTFOLIO_DATA.socials.github} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
             <motion.div 
               className="p-4 rounded-full border-2 border-border group-hover:border-primary group-hover:bg-primary/10 transition-all"
               whileHover={{ scale: 1.1, rotate: -5 }}
@@ -593,7 +557,7 @@ const Contact = () => {
             </motion.div>
             <span className="text-xs font-mono uppercase tracking-widest text-text-tertiary group-hover:text-primary transition-colors">GitHub</span>
           </a>
-          <a href={PORTFOLIO_DATA.socials.linkedin} className="flex flex-col items-center gap-2 group">
+          <a href={PORTFOLIO_DATA.socials.linkedin} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
             <motion.div 
               className="p-4 rounded-full border-2 border-border transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -623,105 +587,178 @@ const Contact = () => {
   );
 };
 
-// ============================================================================
-// NAVIGATION
-// ============================================================================
-
 const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.nav 
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-5 backdrop-blur-xl border-b transition-all duration-500 ${
-        scrolled 
-          ? 'bg-bg-primary/80 border-border shadow-lg' 
-          : 'bg-transparent border-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="flex-1 flex justify-start gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-text-tertiary">
-        <motion.a 
-          href="#work" 
-          className="hover:text-accent transition-colors relative group"
-          whileHover={{ y: -2 }}
-        >
-          Work
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
-        </motion.a>
-        <motion.a 
-          href="#experience" 
-          className="hover:text-accent transition-colors relative group"
-          whileHover={{ y: -2 }}
-        >
-          Experience
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
-        </motion.a>
-      </div>
-
-      <div className="flex-1 flex justify-center">
-        <motion.div 
-          layoutId="signature-brand"
-          className="w-20 md:w-28 h-auto cursor-pointer text-text-primary hover:text-accent transition-colors"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          layout
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+    <>
+      <motion.nav 
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-5 backdrop-blur-xl border-b transition-all duration-500 ${
+          scrolled 
+            ? 'bg-bg-primary/95 border-border shadow-lg' 
+            : 'bg-bg-primary/70 border-border'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <motion.button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden p-2.5 rounded-full border-2 border-border hover:border-accent hover:bg-accent/10 transition-all z-50 bg-bg-primary/50 backdrop-blur-sm"
           whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Toggle menu"
         >
-          <SignatureSVG />
-        </motion.div>
-      </div>
+          {menuOpen ? <X size={18} className="text-text-primary" /> : <Menu size={18} className="text-text-primary" />}
+        </motion.button>
 
-      <div className="flex-1 flex justify-end gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-text-tertiary items-center">
-        <motion.a 
-          href="#about" 
-          className="hover:text-accent transition-colors relative group"
-          whileHover={{ y: -2 }}
-        >
-          About Me
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
-        </motion.a>
-        <motion.a 
-          href="#contact" 
-          className="hover:text-accent transition-colors relative group"
-          whileHover={{ y: -2 }}
-        >
-          Contact
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
-        </motion.a>
-        
-        {/* Theme Toggle */}
+        <div className="hidden md:flex flex-1 justify-start gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-text-tertiary">
+          <motion.a 
+            href="#work" 
+            className="hover:text-accent transition-colors relative group"
+            whileHover={{ y: -2 }}
+          >
+            Work
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+          </motion.a>
+          <motion.a 
+            href="#experience" 
+            className="hover:text-accent transition-colors relative group"
+            whileHover={{ y: -2 }}
+          >
+            Experience
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+          </motion.a>
+        </div>
+
+        <div className="flex-1 flex justify-center">
+          <motion.div 
+            layoutId="signature-brand"
+            className="w-20 md:w-28 h-auto cursor-pointer text-text-primary hover:text-accent transition-colors"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            layout
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <SignatureSVG />
+          </motion.div>
+        </div>
+
+        <div className="hidden md:flex flex-1 justify-end gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-text-tertiary items-center">
+          <motion.a 
+            href="#about" 
+            className="hover:text-accent transition-colors relative group"
+            whileHover={{ y: -2 }}
+          >
+            About Me
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+          </motion.a>
+          <motion.a 
+            href="#contact" 
+            className="hover:text-accent transition-colors relative group"
+            whileHover={{ y: -2 }}
+          >
+            Contact
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+          </motion.a>
+          
+          <motion.button
+            onClick={toggleTheme}
+            className="p-2 rounded-full border-2 border-border hover:border-accent hover:bg-accent/10 transition-all"
+            whileHover={{ scale: 1.1, rotate: 180 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Sun size={16} className="text-text-tertiary hover:text-accent" />
+            ) : (
+              <Moon size={16} className="text-text-tertiary hover:text-accent" />
+            )}
+          </motion.button>
+        </div>
+
         <motion.button
           onClick={toggleTheme}
-          className="p-2 rounded-full border-2 border-border hover:border-accent hover:bg-accent/10 transition-all"
+          className="md:hidden p-2.5 rounded-full border-2 border-border hover:border-accent hover:bg-accent/10 transition-all bg-bg-primary/50 backdrop-blur-sm"
           whileHover={{ scale: 1.1, rotate: 180 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle theme"
         >
           {theme === 'dark' ? (
-            <Sun size={16} className="text-text-tertiary hover:text-accent" />
+            <Sun size={16} className="text-text-primary" />
           ) : (
-            <Moon size={16} className="text-text-tertiary hover:text-accent" />
+            <Moon size={16} className="text-text-primary" />
           )}
         </motion.button>
-      </div>
-    </motion.nav>
+      </motion.nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 md:hidden"
+            onClick={() => setMenuOpen(false)}
+          >
+            <motion.div
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="absolute top-0 left-0 h-full w-64 bg-bg-secondary/95 backdrop-blur-xl border-r border-border shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="flex flex-col gap-6 p-8 pt-24">
+                <motion.a 
+                  href="#work" 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
+                  whileHover={{ x: 8 }}
+                >
+                  Work
+                </motion.a>
+                <motion.a 
+                  href="#experience" 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
+                  whileHover={{ x: 8 }}
+                >
+                  Experience
+                </motion.a>
+                <motion.a 
+                  href="#about" 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
+                  whileHover={{ x: 8 }}
+                >
+                  About Me
+                </motion.a>
+                <motion.a 
+                  href="#contact" 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
+                  whileHover={{ x: 8 }}
+                >
+                  Contact
+                </motion.a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
-
-// ============================================================================
-// INTRO SEQUENCE
-// ============================================================================
 
 const IntroSequence = ({ onComplete }) => {
   return (
@@ -751,10 +788,6 @@ const IntroSequence = ({ onComplete }) => {
     </motion.div>
   );
 };
-
-// ============================================================================
-// MAIN APP
-// ============================================================================
 
 export default function Portfolio() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -814,6 +847,10 @@ export default function Portfolio() {
             --primary: #3B82F6;
           }
 
+          * {
+            -webkit-tap-highlight-color: transparent;
+          }
+
           .bg-bg-primary { background-color: var(--bg-primary); }
           .bg-bg-secondary { background-color: var(--bg-secondary); }
           .bg-bg-tertiary { background-color: var(--bg-tertiary); }
@@ -842,7 +879,6 @@ export default function Portfolio() {
             animation: gradient 8s ease-in-out infinite;
           }
 
-          /* Scrollbar Styling */
           ::-webkit-scrollbar {
             width: 10px;
           }
