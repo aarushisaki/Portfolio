@@ -251,7 +251,7 @@ const Hero = () => {
             </div>
 
             <motion.a
-              href="/resume.pdf"
+              href="/Aarushi Saki.pdf"
               download="Aarushi_Saki_Resume.pdf"
               className="inline-flex w-fit items-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-accent text-bg-primary font-mono text-xs sm:text-sm uppercase tracking-wider rounded-full hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
               initial={{ opacity: 0, y: 20 }}
