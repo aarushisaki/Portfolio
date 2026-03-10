@@ -48,7 +48,7 @@ const PORTFOLIO_DATA = {
       id: 1,
       role: "President",
       company: "GSoC Innovators Club",
-      period: "Sep 2025 – Present",
+      period: "Sep 2025 – Mar 2026",
       impact: [
         "Led organizational scale-up from 14 to 57 members, designing team structures and workflows to support rapid growth.",
         "Owned digital growth initiatives, nearly doubling social media reach and improving engagement through targeted content.",
@@ -71,11 +71,20 @@ const PORTFOLIO_DATA = {
     Technologies: ["Flask", "Bootstrap", "WordPress", "REST APIs"],
     Tools: ["VS Code", "GitHub", "Figma", "MATLAB", "Canva"]
   },
+  research: {
+    title: "Policy Credibility, Monetary Tightening, and the United Kingdom's Economic Downturn",
+    year: "2024",
+    type: "Independent Undergraduate Research",
+    keywords: ["Monetary Policy", "Fiscal Policy", "Policy Credibility", "Currency Depreciation", "Bond Markets", "UK Economy"],
+    abstract: "This paper examines the United Kingdom's economic instability of 2022, analyzing the compounding effects of inflationary pressures, fiscal shocks, and aggressive monetary tightening. Central to the analysis is the role of policy credibility — how institutional signaling, fiscal communication failures, and central bank messaging contributed to sterling depreciation and sustained bond market stress. Drawing on qualitative analysis of macroeconomic indicators, policy statements, and secondary literature, the paper argues that credibility gaps in fiscal-monetary coordination amplified the severity of the downturn beyond what fundamentals alone would predict.",
+    methodology: ["Qualitative macroeconomic analysis", "Policy document review", "Secondary literature synthesis", "Macroeconomic indicator analysis"],
+    availability: "Available upon request",
+    pdfPath: "/research-paper.pdf"
+  },
   about: [
-    "I don't approach my work as a checklist of tasks — I think in systems.",
-    "I'm drawn to roles where structure matters: shaping interfaces, organizing information, and building processes that don't collapse when things scale. Whether I'm engineering frontend components, mapping workflows, or supporting leadership initiatives, my focus stays the same — clarity, efficiency, and intent.",
-    "I've led fast-growing student communities, built interactive web platforms, and worked close to execution rather than theory. I care about how things feel to users, how they function behind the scenes, and whether they hold up under real-world use.",
-    "I'm most effective in environments that value ownership, thoughtful problem-solving, and people who can move between ideas and execution without losing precision."
+    "It started with watching my dad work. He's a software engineer, and something about the way he moved through screens — purposeful, fluent — made computers feel like a language worth learning. I started with Paint doodles, then graduated to making a cartoon dog walk across the screen in Scratch. Now I build systems. The scale changed. The fascination didn't.",
+    "I work at the intersection of frontend engineering and research — building interfaces that are considered, and asking questions that don't have obvious answers. My research on UK monetary policy taught me that the gap between what institutions say and what markets believe can move an entire economy. I carry that same attention to signal and structure into everything I build.",
+    "I'm currently open to remote internships in frontend engineering or research assistance, and available for freelance work — portfolios, founder sites, and static web builds. I do my best work in environments that value ownership, precision, and people who can move between ideas and execution without losing either."
   ]
 };
 
@@ -379,13 +388,146 @@ const Projects = () => {
   );
 };
 
+const Research = () => {
+  const r = PORTFOLIO_DATA.research;
+  return (
+    <section id="research" className="py-32 px-6 md:px-20 bg-bg-primary relative z-10">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-baseline justify-between mb-20 border-b border-border pb-4">
+          <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[02] Research</h2>
+          <motion.div
+            className="h-1 w-20 bg-accent rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 80 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="border border-border rounded-2xl overflow-hidden"
+        >
+          {/* Header band */}
+          <div className="bg-bg-secondary px-8 md:px-12 py-6 border-b border-border flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <span className="text-xs font-mono text-accent uppercase tracking-widest border border-accent/30 bg-accent/5 px-3 py-1 rounded-full">
+                {r.type}
+              </span>
+              <span className="text-xs font-mono text-text-tertiary">{r.year}</span>
+            </div>
+            <motion.a
+              href={r.pdfPath}
+              download
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-text-tertiary hover:text-accent border border-border hover:border-accent px-4 py-2 rounded-full transition-all duration-300 group"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Download size={12} className="group-hover:animate-bounce" />
+              Request Paper
+            </motion.a>
+          </div>
+
+          {/* Title */}
+          <div className="px-8 md:px-12 pt-10 pb-8 border-b border-border">
+            <motion.h3
+              className="text-2xl md:text-4xl font-serif text-text-primary leading-snug max-w-3xl"
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              {r.title}
+            </motion.h3>
+            <motion.p
+              className="mt-3 text-xs font-mono text-text-tertiary uppercase tracking-widest"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+            >
+              Aarushi Saki — VIT Bhopal University
+            </motion.p>
+          </div>
+
+          {/* Abstract + Methodology */}
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+            {/* Abstract */}
+            <div className="md:col-span-2 px-8 md:px-12 py-10">
+              <p className="text-xs font-mono text-accent uppercase tracking-widest mb-4">Abstract</p>
+              <motion.p
+                className="text-base md:text-lg font-sans font-light text-text-secondary leading-relaxed"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+              >
+                {r.abstract}
+              </motion.p>
+            </div>
+
+            {/* Methodology + Keywords */}
+            <div className="px-8 md:px-10 py-10 space-y-10 bg-bg-secondary/40">
+              <div>
+                <p className="text-xs font-mono text-accent uppercase tracking-widest mb-4">Methodology</p>
+                <ul className="space-y-2">
+                  {r.methodology.map((m, i) => (
+                    <motion.li
+                      key={i}
+                      className="flex items-start gap-2 text-sm font-sans font-light text-text-tertiary"
+                      initial={{ opacity: 0, x: 10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+                    >
+                      <span className="text-accent mt-1.5 text-xs">▸</span>
+                      {m}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-xs font-mono text-accent uppercase tracking-widest mb-4">Keywords</p>
+                <div className="flex flex-wrap gap-2">
+                  {r.keywords.map((kw, i) => (
+                    <motion.span
+                      key={kw}
+                      className="text-xs font-mono text-text-tertiary border border-border px-3 py-1 rounded-full hover:border-accent hover:text-accent transition-colors cursor-default"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
+                      whileHover={{ y: -2, scale: 1.05 }}
+                    >
+                      {kw}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-mono text-accent uppercase tracking-widest mb-2">Availability</p>
+                <p className="text-sm font-mono text-text-tertiary italic">{r.availability}</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const Experience = () => {
   return (
     <section id="experience" className="py-32 px-6 md:px-20 bg-bg-primary relative z-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
         <div>
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[02] Experience</h2>
+            <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[03] Experience</h2>
             <motion.div
               className="h-1 w-12 bg-primary rounded-full"
               initial={{ width: 0 }}
@@ -432,7 +574,7 @@ const Experience = () => {
 
         <div>
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[03] Capabilities</h2>
+            <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[04] Capabilities</h2>
             <motion.div
               className="h-1 w-12 bg-primary rounded-full"
               initial={{ width: 0 }}
@@ -481,7 +623,7 @@ const About = () => {
       
       <div className="max-w-6xl mx-auto">
         <div className="flex items-baseline justify-between mb-20 border-b border-border pb-4">
-          <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[04] About Me</h2>
+          <h2 className="text-sm font-mono text-text-tertiary uppercase tracking-widest">[05] About Me</h2>
           <motion.div
             className="h-1 w-20 bg-accent rounded-full"
             initial={{ width: 0 }}
@@ -637,6 +779,14 @@ const Navigation = () => {
             Experience
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
           </motion.a>
+          <motion.a 
+            href="#research" 
+            className="hover:text-accent transition-colors relative group"
+            whileHover={{ y: -2 }}
+          >
+            Research
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+          </motion.a>
         </div>
 
         <div className="flex-1 flex justify-center">
@@ -736,6 +886,14 @@ const Navigation = () => {
                   Experience
                 </motion.a>
                 <motion.a 
+                  href="#research" 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
+                  whileHover={{ x: 8 }}
+                >
+                  Research
+                </motion.a>
+                <motion.a 
                   href="#about" 
                   onClick={() => setMenuOpen(false)} 
                   className="text-xl font-bold tracking-wider uppercase text-text-tertiary hover:text-accent transition-colors py-2 border-b border-border"
@@ -815,6 +973,7 @@ export default function Portfolio() {
         >
           <Hero />
           <Projects />
+          <Research />
           <Experience />
           <About />
           <Contact />
